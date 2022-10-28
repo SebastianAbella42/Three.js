@@ -155,7 +155,6 @@
 
                 let pos1 = {x: -1, y: 35, z: 0};
                 let pos2 = {x: -1, y: 30, z: 0};
-                let pos3 = {x: -1, y: 25, z: 0};
 
                 let radius = 2;
                 let scale = {x: 5, y: 3, z: 2};
@@ -228,45 +227,10 @@
 
                 block.userData.physicsBody = blockBody;
                 rigidBodies.push(block);
-
-                //Block Graphics
-                let block1 = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
-
-                block1.position.set(pos3.x, pos3.y, pos3.z);
-                block1.scale.set(scale.x, scale.y, scale.z);
-
-                block1.castShadow = true;
-                block1.receiveShadow = true;
-
-                scene.add(block1);
-
-
-                //Block Physics
-                transform.setIdentity();
-                transform.setOrigin( new Ammo.btVector3( pos3.x, pos3.y, pos3.z ) );
-                transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
-                motionState = new Ammo.btDefaultMotionState( transform );
-
-                let blockColShape1 = new Ammo.btBoxShape( new Ammo.btVector3( scale.x * 0.5, scale.y * 0.5, scale.z * 0.5 ) );
-                blockColShape1.setMargin( 0.05 );
-
-                localInertia = new Ammo.btVector3( 0, 0, 0 );
-                blockColShape1.calculateLocalInertia( mass2, localInertia );
-
-                rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape1, localInertia );
-                let blockBody1 = new Ammo.btRigidBody( rbInfo );
-
-                physicsWorld.addRigidBody( blockBody1);
-
-                block1.userData.physicsBody = blockBody1;
-                rigidBodies.push(block1);
-
                 //Create Joints
                 let spherePivot = new Ammo.btVector3( 0, - radius, 0 );
                 let blockPivot = new Ammo.btVector3( - scale.x * 0.5, 1, 1 );
-                let block1Pivot=new Ammo.btVector3(-scale.x*0.5,1,1);
                 let p2p = new Ammo.btPoint2PointConstraint( sphereBody, blockBody, spherePivot, blockPivot);
-                let p2p1= new Ammo.btPoint2PointConstraint(blockBody,blockBody1,blockPivot,block1Pivot);
                 physicsWorld.addConstraint( p2p,p2p1, false );
 
             }
