@@ -158,7 +158,7 @@
                 let pos3 = {x: -1, y: 25, z: 0};
 
                 let radius = 2;
-                let scale = {x: 5, y: 10, z: 2};
+                let scale = {x: 5, y: 3, z: 2};
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass1 = 0;
                 let mass2 = 1;
@@ -265,7 +265,7 @@
                 let spherePivot = new Ammo.btVector3( 0, - radius, 0 );
                 let blockPivot = new Ammo.btVector3( - scale.x * 0.5, 1, 1 );
                 let block1Pivot=new Ammo.btVector3(-scale.x*0.5+(pos1.x-pos2.x),1,1);
-                let p2p = new Ammo.btPoint2PointConstraint( sphereBody, blockBody, spherePivot, blockPivot,block1Pivot);
+                let p2p = new Ammo.btPoint2PointConstraint( sphereBody, blockBody,blockBody1, spherePivot, blockPivot,block1Pivot);
                 physicsWorld.addConstraint( p2p, false );
 
             }
