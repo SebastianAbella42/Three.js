@@ -310,8 +310,6 @@
 
                 rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape, localInertia );
                 let blockBody = new Ammo.btRigidBody( rbInfo );
-
-                physicsWorld.addRigidBody( blockBody, colGroupGreenBall, colGroupRedBall );
                 
                 block.userData.physicsBody = blockBody;
                 rigidBodies.push(block);
