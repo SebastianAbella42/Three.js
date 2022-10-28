@@ -11,9 +11,9 @@
         <script src="js/ammo.js"></script>
         <script>
 
-            //variable declaration section
+            //Declaracion de variables
             let physicsWorld, scene, camera, renderer, rigidBodies = [];
-            //Ammojs Initialization
+            //Inicializacion Ammo
             Ammo().then(start)
 
             function start (){
@@ -42,26 +42,26 @@
 
             function setupGraphics(){
 
-                //create clock for timing
+                //Crear reloj
                 clock = new THREE.Clock();
 
-                //create the scene
+                //crear escena
                 scene = new THREE.Scene();
                 scene.background = new THREE.Color( 0xbfd1e5 );
 
-                //create camera
+                //crear camara
                 camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.2, 5000 );
                 camera.position.set( 0, 30, 70 );
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-                //Add hemisphere light
+                //Agregar luz hermisferica
                 let hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.1 );
                 hemiLight.color.setHSL( 0.6, 0.6, 0.6 );
                 hemiLight.groundColor.setHSL( 0.1, 1, 0.4 );
                 hemiLight.position.set( 0, 50, 0 );
                 scene.add( hemiLight );
 
-                //Add directional light
+                //agregar luz direccional
                 let dirLight = new THREE.DirectionalLight( 0xffffff , 1);
                 dirLight.color.setHSL( 0.1, 1, 0.95 );
                 dirLight.position.set( -1, 1.75, 1 );
@@ -82,7 +82,7 @@
 
                 dirLight.shadow.camera.far = 13500;
 
-                //Setup the renderer
+                //Render
                 renderer = new THREE.WebGLRenderer( { antialias: true } );
                 renderer.setClearColor( 0xbfd1e5 );
                 renderer.setPixelRatio( window.devicePixelRatio );
@@ -119,7 +119,7 @@
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass = 0;
 
-                //threeJS Section
+                //threeJS
                 let blockPlane = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xa0afa4}));
 
                 blockPlane.position.set(pos.x, pos.y, pos.z);
@@ -131,7 +131,7 @@
                 scene.add(blockPlane);
 
 
-                //Ammojs Section
+                //Ammojs 
                 let transform = new Ammo.btTransform();
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
@@ -164,7 +164,7 @@
 
                 let transform = new Ammo.btTransform();
 
-                //Sphere Graphics
+                //Graficos de la esfera
                 let ball = new THREE.Mesh(new THREE.SphereBufferGeometry(radius), new THREE.MeshPhongMaterial({color: 0xb846db}));
 
                 ball.position.set(pos1.x, pos1.y, pos1.z);
@@ -175,7 +175,7 @@
                 scene.add(ball);
 
 
-                //Sphere Physics
+                //Fisicas de la esfera
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos1.x, pos1.y, pos1.z ) );
                 transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
@@ -196,7 +196,7 @@
                 rigidBodies.push(ball);
 
 
-                //Block Graphics------
+                //Graficos del bloque
                 let block = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
 
                 block.position.set(pos2.x, pos2.y, pos2.z);
@@ -208,7 +208,7 @@
                 scene.add(block);
 
 
-                //Block Physics--------
+                //Fisicas del bloque
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos2.x, pos2.y, pos2.z ) );
                 transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
@@ -227,7 +227,7 @@
 
                 block.userData.physicsBody = blockBody;
                 rigidBodies.push(block);
-                //Create Joints
+                //Crear enlaces
                 let spherePivot = new Ammo.btVector3( 0, - radius, 0 );
                 let blockPivot = new Ammo.btVector3( - scale.x * 0.5, 1, 1 );
                 let p2p = new Ammo.btPoint2PointConstraint( sphereBody, blockBody, spherePivot, blockPivot);
@@ -237,10 +237,10 @@
 
             function updatePhysics( deltaTime ){
 
-                // Step world
+
                 physicsWorld.stepSimulation( deltaTime, 10 );
 
-                // Update rigid bodies
+                //Actualizar objetos rigidos
                 for ( let i = 0; i < rigidBodies.length; i++ ) {
                     let objThree = rigidBodies[ i ];
                     let objAmmo = objThree.userData.physicsBody;
