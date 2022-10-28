@@ -16,7 +16,7 @@
             let ball, moveDirection = { left: 0, right: 0, forward: 0, back: 0, up: 0, down: 0 };
             let kObject = null, kMoveDirection = { left: 0, right: 0, forward: 0, back: 0 }, tmpPos = new THREE.Vector3(), tmpQuat = new THREE.Quaternion();
             const STATE = { DISABLE_DEACTIVATION : 4 };
-
+            const FLAGS = { CF_KINEMATIC_OBJECT: 2 };
             let cbContactResult;
             let redTile, cbContactPairResult;
 
@@ -184,7 +184,7 @@
             }
           function createBlock(){
                 
-                let pos = {x: 0+cont, y: 0, z: 0+cont};
+                let pos = {x: 0, y: 0, z: 0};
                 let scale = {x: 100, y: 2, z: 100};
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass = 0;
@@ -221,7 +221,6 @@
                 body.setRollingFriction(10);
 
                 physicsWorld.addRigidBody( body );
-		cont=cont+100;
             }
 
 
