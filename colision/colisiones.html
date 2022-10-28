@@ -11,7 +11,7 @@
         <script src="js/ammo.js"></script>
         <script>
 
-            //variable declaration section
+            //Declaracion de las variables
             let physicsWorld, scene, camera, renderer, rigidBodies = [], pos = new THREE.Vector3(), tmpTrans = null;
             let ball, moveDirection = { left: 0, right: 0, forward: 0, back: 0, up: 0, down: 0 };
             let kObject = null, kMoveDirection = { left: 0, right: 0, forward: 0, back: 0 }, tmpPos = new THREE.Vector3(), tmpQuat = new THREE.Quaternion();
@@ -20,7 +20,7 @@
             let cbContactResult;
             let redTile, cbContactPairResult;
 
-            //Ammojs Initialization
+            //Se inicia Ammo
             Ammo().then(start)
 
             function start (){
@@ -61,26 +61,26 @@
 
             function setupGraphics(){
 
-                //create clock for timing
+                //Crear reloj de timing
                 clock = new THREE.Clock();
 
-                //create the scene
+                //Crear escena
                 scene = new THREE.Scene();
                 scene.background = new THREE.Color( 0xabfeff );
 
-                //create camera
+                //crear camara
                 camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.2, 5000 );
                 camera.position.set( 0, 80, 40 );
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-                //Add hemisphere light
+                //Luz Hemisferica
                 let hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.1 );
                 hemiLight.color.setHSL( 0.6, 0.6, 0.6 );
                 hemiLight.groundColor.setHSL( 0.1, 1, 0.4 );
                 hemiLight.position.set( 0, 50, 0 );
                 scene.add( hemiLight );
 
-                //Add directional light
+                //Luz direccional
                 let dirLight = new THREE.DirectionalLight( 0xffffff , 1);
                 dirLight.color.setHSL( 0.1, 1, 0.95 );
                 dirLight.position.set( -1, 1.75, 1 );
@@ -101,7 +101,7 @@
 
                 dirLight.shadow.camera.far = 13500;
 
-                //Setup the renderer
+                //Render
                 renderer = new THREE.WebGLRenderer( { antialias: true } );
                 renderer.setClearColor( 0xbfd1e5 );
                 renderer.setPixelRatio( window.devicePixelRatio );
@@ -156,27 +156,27 @@
 
                 switch(keyCode){
 
-                    case 87: //W: FORWARD
+                    case 87: //W: Adelante
                         moveDirection.forward = 1;
                         break;
                         
-                    case 83: //S: BACK
+                    case 83: //S: Atras
                         moveDirection.back = 1;
                         break;
                         
-                    case 65: //A: LEFT
+                    case 65: //A: Izquierda
                         moveDirection.left = 1;
                         break;
                         
-                    case 68: //D: RIGHT
+                    case 68: //D: Derecha
                         moveDirection.right = 1;
                         break;
 
-                    case 84://T
+                    case 84://Contacto
                         checkContact();
                         break;
                                             
-                    case 74://J
+                    case 74://Saltar
                         jump();
                         break;
                         
@@ -189,7 +189,7 @@
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass = 0;
 
-                //threeJS Section
+                //threeJS 
                 let blockPlane = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xa0afa4}));
 
                 blockPlane.position.set(pos.x, pos.y, pos.z);
@@ -201,7 +201,7 @@
                 scene.add(blockPlane);
 
 
-                //Ammojs Section
+                //Ammojs 
                 let transform = new Ammo.btTransform();
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
@@ -228,26 +228,26 @@
                 let keyCode = event.keyCode;
 
                 switch(keyCode){
-                    case 87: //W: FORWARD
+                    case 87: //W: Adelante
                         moveDirection.forward = 0;
                         break;
                         
-                    case 83: //S: BACK
+                    case 83: //S: Atras
                         moveDirection.back = 0;
                         break;
                         
-                    case 65: //A: LEFT
+                    case 65: //A: Izquierda
                         moveDirection.left = 0;
                         break;
                         
-                    case 68: //D: RIGHT
+                    case 68: //D: Derecha
                         moveDirection.right = 0;
                         break;
-		    case 37: //←: LEFT
+		    case 37: //←: Izquierda
                         kMoveDirection.left = 1
                         break;
                         
-                    case 39: //→: RIGHT
+                    case 39: //→: Derecha
                         kMoveDirection.right = 1
                         break;
                 }
@@ -269,7 +269,7 @@
 
                 for (const tile of tiles) {
                         
-                    //threeJS Section
+                    //threeJS 
                     let pos = tile.pos;
                     let mesh = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: tile.color}));
 
@@ -284,7 +284,7 @@
                     scene.add(mesh);
 
 
-                    //Ammojs Section
+                    //Ammojs 
                     let transform = new Ammo.btTransform();
                     transform.setIdentity();
                     transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
@@ -326,7 +326,7 @@
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass = 1;
 
-                //threeJS Section
+                //threeJS 
                 ball = ballObject = new THREE.Mesh(new THREE.SphereBufferGeometry(radius), new THREE.MeshPhongMaterial({color: 0x800080}));
 
                 ball.position.set(pos.x, pos.y, pos.z);
@@ -339,7 +339,7 @@
                 scene.add(ball);
 
 
-                //Ammojs Section
+                //Ammojs 
                 let transform = new Ammo.btTransform();
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
@@ -377,7 +377,7 @@
                 let quat = {x: 0, y: 0, z: 0, w: 1};
                 let mass = 1;
 
-                //threeJS Section
+                //threeJS 
                 kObject = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
 
                 kObject.position.set(pos.x, pos.y, pos.z);
@@ -389,7 +389,7 @@
                 scene.add(kObject);
 
 
-                //Ammojs Section
+                //Ammojs 
                 let transform = new Ammo.btTransform();
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos.x, pos.y, pos.z ) );
@@ -568,10 +568,9 @@
 
             function updatePhysics( deltaTime ){
 
-                // Step world
                 physicsWorld.stepSimulation( deltaTime, 10 );
 
-                // Update rigid bodies
+                // Actualizar cuerpos rigidos
                 for ( let i = 0; i < rigidBodies.length; i++ ) {
                     let objThree = rigidBodies[ i ];
                     let objAmmo = objThree.userData.physicsBody;
