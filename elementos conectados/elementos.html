@@ -190,7 +190,7 @@
                 let rbInfo = new Ammo.btRigidBodyConstructionInfo( mass1, motionState, sphereColShape, localInertia );
                 let sphereBody = new Ammo.btRigidBody( rbInfo );
 
-                physicsWorld.addRigidBody( sphereBody, colGroupGreenBall, colGroupRedBall );
+                physicsWorld.addRigidBody( sphereBody);
 
                 ball.userData.physicsBody = sphereBody;
                 rigidBodies.push(ball);
