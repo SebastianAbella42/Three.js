@@ -197,7 +197,7 @@
                 rigidBodies.push(ball);
 
 
-                //Block Graphics
+                //Block Graphics------
                 let block = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
 
                 block.position.set(pos2.x, pos2.y, pos2.z);
@@ -209,7 +209,7 @@
                 scene.add(block);
 
 
-                //Block Physics
+                //Block Physics--------
                 transform.setIdentity();
                 transform.setOrigin( new Ammo.btVector3( pos2.x, pos2.y, pos2.z ) );
                 transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
@@ -247,13 +247,13 @@
                 transform.setRotation( new Ammo.btQuaternion( quat.x, quat.y, quat.z, quat.w ) );
                 motionState = new Ammo.btDefaultMotionState( transform );
 
-                let blockColShape = new Ammo.btBoxShape( new Ammo.btVector3( scale.x * 0.5, scale.y * 0.5, scale.z * 0.5 ) );
-                blockColShape.setMargin( 0.05 );
+                let blockColShape1 = new Ammo.btBoxShape( new Ammo.btVector3( scale.x * 0.5, scale.y * 0.5, scale.z * 0.5 ) );
+                blockColShape1.setMargin( 0.05 );
 
                 localInertia = new Ammo.btVector3( 0, 0, 0 );
-                blockColShape.calculateLocalInertia( mass2, localInertia );
+                blockColShape1.calculateLocalInertia( mass2, localInertia );
 
-                rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape, localInertia );
+                rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape1, localInertia );
                 let blockBody1 = new Ammo.btRigidBody( rbInfo );
 
                 physicsWorld.addRigidBody( blockBody1);
