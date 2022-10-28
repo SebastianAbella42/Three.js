@@ -284,11 +284,6 @@
                 let rbInfo = new Ammo.btRigidBodyConstructionInfo( mass1, motionState, sphereColShape, localInertia );
                 let sphereBody = new Ammo.btRigidBody( rbInfo );
 
-                physicsWorld.addRigidBody( sphereBody, colGroupGreenBall, colGroupRedBall );
-
-                ball.userData.physicsBody = sphereBody;
-                rigidBodies.push(ball);
-                
 
                 //Block Graphics
                 let block = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
