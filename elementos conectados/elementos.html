@@ -13,7 +13,8 @@
 
             //variable declaration section
             let physicsWorld, scene, camera, renderer, rigidBodies = [];
-            let colGroupPlane = 1;
+            let colGroupPlane = 1, colGroupRedBall = 2, colGroupGreenBall = 4
+
             //Ammojs Initialization
             Ammo().then(start)
 
@@ -102,7 +103,7 @@
 
             }
 
-        
+
             function renderFrame(){
 
                 let deltaTime = clock.getDelta();
@@ -116,10 +117,10 @@
             }
 
 
-            
+
 
             function createBlock(){
-                
+
                 let pos = {x: 0, y: 0, z: 0};
                 let scale = {x: 50, y: 2, z: 50};
                 let quat = {x: 0, y: 0, z: 0, w: 1};
@@ -159,7 +160,7 @@
 
 
             function createBall(){
-                
+
                 let pos = {x: 0, y: 20, z: 0};
                 let radius = 2;
                 let quat = {x: 0, y: 0, z: 0, w: 1};
@@ -169,7 +170,7 @@
                 let ball = new THREE.Mesh(new THREE.SphereBufferGeometry(radius), new THREE.MeshPhongMaterial({color: 0xff0505}));
 
                 ball.position.set(pos.x, pos.y, pos.z);
-                
+
                 ball.castShadow = true;
                 ball.receiveShadow = true;
 
@@ -194,7 +195,7 @@
 
 
                 physicsWorld.addRigidBody( body, colGroupRedBall, colGroupPlane | colGroupGreenBall );
-                
+
                 ball.userData.physicsBody = body;
                 rigidBodies.push(ball);
             }
@@ -202,7 +203,7 @@
 
 
             function createMaskBall(){
-                
+
                 let pos = {x: 1, y: 30, z: 0};
                 let radius = 2;
                 let quat = {x: 0, y: 0, z: 0, w: 1};
@@ -212,7 +213,7 @@
                 let ball = new THREE.Mesh(new THREE.SphereBufferGeometry(radius), new THREE.MeshPhongMaterial({color: 0x00ff08}));
 
                 ball.position.set(pos.x, pos.y, pos.z);
-                
+
                 ball.castShadow = true;
                 ball.receiveShadow = true;
 
@@ -237,7 +238,7 @@
 
 
                 physicsWorld.addRigidBody( body, colGroupGreenBall, colGroupRedBall);
-                
+
                 ball.userData.physicsBody = body;
                 rigidBodies.push(ball);
             }
@@ -245,7 +246,7 @@
 
 
             function createJointObjects(){
-                
+
                 let pos1 = {x: -1, y: 15, z: 0};
                 let pos2 = {x: -1, y: 10, z: 0};
 
@@ -283,6 +284,11 @@
                 let rbInfo = new Ammo.btRigidBodyConstructionInfo( mass1, motionState, sphereColShape, localInertia );
                 let sphereBody = new Ammo.btRigidBody( rbInfo );
 
+                physicsWorld.addRigidBody( sphereBody, colGroupGreenBall, colGroupRedBall );
+
+                ball.userData.physicsBody = sphereBody;
+                rigidBodies.push(ball);
+
 
                 //Block Graphics
                 let block = new THREE.Mesh(new THREE.BoxBufferGeometry(), new THREE.MeshPhongMaterial({color: 0xf78a1d}));
@@ -310,7 +316,9 @@
 
                 rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape, localInertia );
                 let blockBody = new Ammo.btRigidBody( rbInfo );
-                
+
+                physicsWorld.addRigidBody( blockBody, colGroupGreenBall, colGroupRedBall );
+
                 block.userData.physicsBody = blockBody;
                 rigidBodies.push(block);
 
