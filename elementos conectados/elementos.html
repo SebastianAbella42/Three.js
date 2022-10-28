@@ -148,7 +148,7 @@
                 let body = new Ammo.btRigidBody( rbInfo );
 
 
-                physicsWorld.addRigidBody( body, colGroupPlane, colGroupRedBall );
+                physicsWorld.addRigidBody( body);
             }
 
             function createJointObjects(){
@@ -223,7 +223,7 @@
                 rbInfo = new Ammo.btRigidBodyConstructionInfo( mass2, motionState, blockColShape, localInertia );
                 let blockBody = new Ammo.btRigidBody( rbInfo );
 
-                physicsWorld.addRigidBody( blockBody, colGroupGreenBall, colGroupRedBall );
+                physicsWorld.addRigidBody( blockBody);
 
                 block.userData.physicsBody = blockBody;
                 rigidBodies.push(block);
