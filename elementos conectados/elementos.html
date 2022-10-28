@@ -231,7 +231,7 @@
                 let spherePivot = new Ammo.btVector3( 0, - radius, 0 );
                 let blockPivot = new Ammo.btVector3( - scale.x * 0.5, 1, 1 );
                 let p2p = new Ammo.btPoint2PointConstraint( sphereBody, blockBody, spherePivot, blockPivot);
-                physicsWorld.addConstraint( p2p,p2p1, false );
+                physicsWorld.addConstraint( p2p, false );
 
             }
 
