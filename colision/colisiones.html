@@ -156,7 +156,8 @@
                     case 68: //D: RIGHT
                         moveDirection.right = 1
                         break;
-
+                    case 32:
+                        moveDirection.up = 1
                     case 38: //↑: FORWARD
                         kMoveDirection.forward = 1
                         break;
@@ -212,6 +213,7 @@
                     case 39: //→: RIGHT
                         kMoveDirection.right = 0
                         break;
+                    
                 }
 
             }
@@ -363,7 +365,7 @@
 
                 let moveX =  moveDirection.right - moveDirection.left;
                 let moveZ =  moveDirection.back - moveDirection.forward;
-                let moveY =  0; 
+                let moveY =  moveDirection.up; 
 
                 if( moveX == 0 && moveY == 0 && moveZ == 0) return;
 
